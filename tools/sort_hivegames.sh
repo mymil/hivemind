@@ -20,6 +20,7 @@
 
 PLAYS_DIR=../plays/all
 DUMBOT_DIR=../plays/dumbot/
+WEAKBOT_DIR=../plays/weakbot/
 TOURNAMENT_DIR=../plays/tournament/
 PLAYER_DIR=../plays/players/
 
@@ -33,6 +34,9 @@ mkdir -p $PLAYER_DIR
 # Move all Dumbot games
 find $PLAYS_DIR -name "*-Dumbot-*" -type f | xargs -I % mv % $DUMBOT_DIR
 
+# Move all WeakBot games
+find $PLAYS_DIR -name "*-WeakBot-*" -type f | xargs -I % mv % $WEAKBOT_DIR
+
 # Move all tournament games
 find $PLAYS_DIR -name "T\!*" -type f | xargs -I % mv % $TOURNAMENT_DIR
 find $PLAYS_DIR -name "T?\!*" -type f | xargs -I % mv % $TOURNAMENT_DIR
@@ -42,7 +46,7 @@ find $PLAYS_DIR -name "M\!*" -type f | xargs -I % mv % $TOURNAMENT_DIR
 find $PLAYS_DIR -name "*.sgf" -type f | xargs -I % mv % $PLAYER_DIR
 
 # Phase 2: Sort game types into seperate directories
-for dir in $MBOT_DIR $TOURNAMENT_DIR $PLAYER_DIR
+for dir in $DUMBOT_DIR $WEAKBOT_DIR $TOURNAMENT_DIR $PLAYER_DIR
 do
     pushd $dir
     find ./ -maxdepth 1 -type f -name "*.sgf" | xargs -n1 -I % gawk 'BEGIN {OFS = ""}
